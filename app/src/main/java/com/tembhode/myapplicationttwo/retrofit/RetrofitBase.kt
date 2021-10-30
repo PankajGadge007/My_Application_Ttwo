@@ -19,6 +19,4 @@ class RetrofitBase {
         var apiInterface: ApiInterface = retrofit.create(ApiInterface::class.java)
 
     }
-
-
 }

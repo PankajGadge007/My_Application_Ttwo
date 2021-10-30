@@ -16,17 +16,17 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var manager: RecyclerView.LayoutManager
-    private lateinit var myAdapter: RecyclerView.Adapter<*>
+    private lateinit var adapter: RecyclerView.Adapter<*>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         manager = LinearLayoutManager(this)
-        getAllData()
+        getData()
     }
 
-    fun getAllData(){
+    fun getData(){
         RetrofitBase.apiInterface.getAllData().enqueue(object: Callback<List<Plant>>{
             override fun onResponse(
                 call: Call<List<Plant>>,
@@ -34,9 +34,9 @@ class MainActivity : AppCompatActivity() {
             ) {
                 if(response.isSuccessful){
                     recyclerView = findViewById<RecyclerView>(R.id.rvMainPage_items).apply{
-                        myAdapter = MyAdapter(response.body()!!)
+                        adapter = MyAdapter(response.body()!!)
                         layoutManager = manager
-                        adapter = myAdapter
+                        adapter = adapter
                     }
                 }
             }
